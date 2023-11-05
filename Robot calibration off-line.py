@@ -4,7 +4,7 @@
 # @File     :Main_启动
 # @Date     :2022/11/28 9:47
 # @Author   :叫猩
-# @Email    :1027918098@qq.com
+# @Email    :w13555929918@qq.com
 # @Software :PyCharm
 """
 import sys, time, re ,os
