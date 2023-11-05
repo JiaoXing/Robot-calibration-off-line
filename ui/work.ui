@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>590</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>590</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Microsoft Sans Serif</family>
+    <pointsize>8</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Robot calibration off-line</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../images/img.qrc">
+    <normaloff>:/Image/图标.png</normaloff>:/Image/图标.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QFrame#frame {
+background-color: #000000;
+border-radius: 8px;
+
+}
+
+QGroupBox {
+font: 12pt &quot;楷体&quot;;
+color: rgb(255, 255, 255);
+border-width:1px;
+border-style:solid;
+border-radius: 3px;
+border-color:rgb(255, 255, 255);
+margin-top:0.5ex;
+
+}
+
+QGroupBox::title{
+subcontrol-origin:margin;
+subcontrol-position:top left;
+left:10px;
+padding:0 1px;
+
+}
+
+QLabel#label{
+ color: rgb(255, 255, 255);
+ border-image: url(:/Image/图标.png);
+
+}
+QLabel{
+ font: 12pt &quot;楷体&quot;;
+ color: rgb(255, 255, 255);
+
+}
+
+QLabel#label2_1{
+ font: 8pt &quot;楷体&quot;;
+ color: rgb(255, 255, 255);
+
+}
+
+QLineEdit{
+ background-color:transparent;
+ font: 10pt &quot;楷体&quot;;
+ color: rgb(255, 255, 255);
+ border:none;
+
+}
+
+QTextEdit{
+ color: rgb(0, 0, 0);
+ border-radius: 3px;
+ background-color: rgb(255, 255, 255);
+}
+
+QTableWidget          
+{
+    background:#FFFFFF;           
+    border-radius:3px;    
+    color:#666666;   
+              
+}
+
+
+
+QTableView QTableCornerButton::section 
+{
+   border-style:solid;
+   border-top-left-radius:3px;
+   border-top-right-radius:0px;
+   border-bottom-left-radius:0px;
+   border-bottom-right-radius:0px;
+
+}
+
+
+
+QTableWidget::item::selected      
+{
+    color:red;                       
+    background:#EFF4FF;           
+}
+QTableWidget::item:selected:active {
+    background-color: #C0C0C0;
+}
+QTableWidget::item:selected:!active {
+    color: black;
+}
+
+
+QTableWidget::setItem
+{
+    color:red;                       
+    background:#EFF4FF;           
+}
+
+QHeaderView                    
+{
+	border:none; 
+	border-radius:3px; 
+    background:transparent;  
+}
+
+QHeaderView::section      
+{
+    font-size:12px;                
+    color:#FFFFFF;             
+    background:#60669B;           
+    border:none;  
+    width: 15px;  
+    height:12px;    
+	padding:3px; 
+	border-radius:3px; 
+}
+
+
+
+
+QScrollBar:vertical {
+    border: none;
+	border-radius: 3px;
+    width: 10px;
+	background-color: rgba(255, 255, 255, 100);
+    margin: 0px 0 0px 0;
+}
+QScrollBar:horizontal{
+    border: none;
+	border-radius: 3px;
+    height: 11px;
+	background-color: rgba(255, 255, 255, 100);
+    margin: 0px 0 0px 0;
+}
+
+
+QScrollBar::handle:vertical,QScrollBar::handle:horizontal {
+    border: none;
+    border-radius: 4px;
+    background-color:  rgb(50, 100, 250);
+    height: 60px;
+    margin: 1px 0px 0px 0px;
+}
+QScrollBar::add-line:vertical {
+	border: none;
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical {
+    border: none;
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+QScrollBar::add-line:horizontal{
+	border: none;
+    width: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line:horizontal {
+    border: none;
+    width: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+QScrollBar::down-arrow:vertica,QScrollBar::down-arrow:horizontal {
+    border:none;
+}
+QScrollBar::up-arrow:vertical,QScrollBar::up-arrow:horizontal {
+    border:none;
+}
+QScrollBar::add-page:vertical,QScrollBar::add-page:horizontal{
+    background-color: rgba(50, 100, 250, 100);
+}
+QScrollBar::sub-page:vertical,QScrollBar::sub-page:horizontal {
+    background-color: rgba(50, 100, 250, 100);
+}
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+QPushButton#pushButton_move{
+ color: rgb(0, 0, 0);
+ background: transparent;
+ border-radius: 5px;
+
+}
+
+QPushButton#pushButton_help,QPushButton#pushButton_Small,QPushButton#pushButton_exit{
+ color: rgb(255, 255, 255);
+ background-color:rgb(30, 194, 27);
+ font: 12pt &quot;黑体&quot;;
+ border-radius: 5px;
+
+}
+
+QPushButton#pushButton_help:hover{
+ background-color: rgb(26, 173, 25);
+
+}
+
+QPushButton#pushButton_help:pressed{
+ background-color: rgb(31, 200, 28);
+}
+
+QPushButton#pushButton_Small:hover{
+ background-color: rgb(26, 173, 25);
+
+}
+
+QPushButton#pushButton_Small:pressed{
+ background-color: rgb(31, 200, 28);
+}
+
+QPushButton#pushButton_exit:hover{
+ background-color: rgb(255, 52, 2);
+}
+
+QPushButton#pushButton_exit:pressed{
+ background-color: rgb(182, 34, 5)
+}
+
+QPushButton#pushButton_dr_robot,QPushButton#pushButton_dr_3d,QPushButton#pushButton_zbzh,QPushButton#pushButton_by,QPushButton#pushButton_report{
+ color: rgb(255, 255, 255);
+ background-color: rgb(128, 128, 128);
+ font: 12pt &quot;黑体&quot;;
+ border-radius: 3px;
+}
+
+QPushButton#pushButton_dr_robot:hover,QPushButton#pushButton_dr_3d:hover,QPushButton#pushButton_zbzh:hover,QPushButton#pushButton_by:hover,QPushButton#pushButton_report:hover{
+ background-color: rgb(160, 160, 160);
+}
+QPushButton#pushButton_dr_robot:pressed,QPushButton#pushButton_dr_3d:pressed,QPushButton#pushButton_zbzh:pressed,QPushButton#pushButton_by:pressed,QPushButton#pushButton_report:pressed{
+ background-color: rgb(96, 96, 96);
+}
+
+
+QPushButton#pushButton_ok{
+ color: rgb(255, 255, 255);
+ background-color:rgb(30, 194, 27);
+ font: 12pt &quot;黑体&quot;;
+ border-radius: 10px;
+}
+
+QPushButton#pushButton_ok:hover{
+ background-color: rgb(26, 173, 25);
+}
+
+QPushButton#pushButton_ok:pressed{
+ background-color: rgb(31, 200, 28);
+}
+
+QRadioButton{
+ color: rgb(255, 255, 255);
+}
+
+
+</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>590</width>
+     <height>530</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="pushButton_ok">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>436</y>
+      <width>121</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>240</width>
+      <height>80</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>执行</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>5</y>
+      <width>40</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Small">
+    <property name="geometry">
+     <rect>
+      <x>495</x>
+      <y>10</y>
+      <width>40</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>40</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>40</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>一</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_exit">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>10</y>
+      <width>40</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>40</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>40</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>×</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_help">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>10</y>
+      <width>40</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>40</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>40</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>220</y>
+      <width>30</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;三&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;坐&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;标&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label2">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>20</y>
+      <width>181</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700; color:#ffffff;&quot;&gt;机 器 人 离线 标定软件&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>30</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;机&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;器&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;人&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;坐&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;标&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>436</y>
+      <width>441</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;工具坐标:[[X, Y, Z]]&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;外部工具坐标:[[X, Y, Z]]&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;工件坐标:[[X, Y, Z]] Q4:[[q1,q2,q3,q4]]&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;计算误差:0.000000000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>210</y>
+      <width>190</width>
+      <height>215</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>设定</string>
+    </property>
+    <widget class="QLabel" name="label4_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>181</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;外部 TCP,三坐标测量点:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label7_2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>160</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>X:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label8_2">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>160</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Y:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label9_2">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>160</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Z:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit4">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>180</y>
+       <width>40</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit5">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>180</y>
+       <width>40</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit6">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>180</y>
+       <width>40</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;工具坐标预估值：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#ffffff;&quot;&gt;机器人品牌：&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton1">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>40</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>ABB</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QRadioButton" name="radioButton2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>KUKA</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QRadioButton" name="radioButton3">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>40</y>
+       <width>80</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>FANUC</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QRadioButton" name="radioButton4">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>60</y>
+       <width>80</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="text">
+      <string>YASKAWA</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QLabel" name="label7">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>100</y>
+       <width>54</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>X:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit1">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>120</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label8">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>100</y>
+       <width>54</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Y:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit2">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>120</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label9">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>100</y>
+       <width>54</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Z:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit3">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>120</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>1000</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>365</y>
+      <width>341</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="pushButton_report">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>10</y>
+       <width>80</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>240</width>
+       <height>90</height>
+      </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>生成报告</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_by">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>10</y>
+       <width>80</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>240</width>
+       <height>90</height>
+      </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>备用</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_zbzh">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>80</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>240</width>
+       <height>90</height>
+      </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>OpenHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>坐标转换</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label5_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>370</y>
+      <width>30</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;工&lt;/p&gt;&lt;p align=&quot;right&quot;&gt;具&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit1">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>541</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点1:[X,Y,Z],[0,0,0,0] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点2:[X,Y,Z],[0,0,0,0] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点3:[X,Y,Z],[0,0,0,0] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点4:[X,Y,Z],[0,0,0,0] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点5:[X,Y,Z],[0,0,0,0] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点6:[X,Y,Z],[0,0,0,0] &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit2">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>210</y>
+      <width>341</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点1:[X,Y,Z] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点2:[X,Y,Z] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点3:[X,Y,Z] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点4:[X,Y,Z] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点5:[X,Y,Z] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;点6:[X,Y,Z] &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label2_1">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>20</y>
+      <width>31</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;v&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../images/img.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButton_Small</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>455</x>
+     <y>19</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>382</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_exit</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>500</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>382</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
+</ui>

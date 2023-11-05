@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="Image">
+    <file>二维码.jpg</file>
+    <file>背景.png</file>
+    <file>图标.png</file>
+  </qresource>
+</RCC>
