@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +26,7 @@
    <string>Robot calibration off-line</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../images/img.qrc">
+   <iconset>
     <normaloff>:/Image/图标.png</normaloff>:/Image/图标.png</iconset>
   </property>
   <property name="styleSheet">
@@ -118,10 +118,10 @@ color:rgb(31, 200, 28);
     <string notr="true"/>
    </property>
    <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
+    <enum>QFrame::Shape::StyledPanel</enum>
    </property>
    <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
+    <enum>QFrame::Shadow::Raised</enum>
    </property>
    <widget class="QPushButton" name="pushButton_ok">
     <property name="geometry">
@@ -199,7 +199,7 @@ color:rgb(31, 200, 28);
      <string>请输入密码</string>
     </property>
     <property name="echoMode">
-     <enum>QLineEdit::Password</enum>
+     <enum>QLineEdit::EchoMode::Password</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_tz">
@@ -321,7 +321,7 @@ color:rgb(31, 200, 28);
   <connection>
    <sender>pushButton_exit</sender>
    <signal>clicked()</signal>
-   <receiver>Form</receiver>
+   <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">

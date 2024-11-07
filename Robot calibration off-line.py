@@ -7,7 +7,10 @@
 # @Email    :1027918098@qq.com
 # @Software :PyCharm
 """
-import time, re, sys
+import os, time, re, sys
+
+from qt_core import *
+
 # 加密
 # 窗口UI文件调用地址
 from modules import *
@@ -30,7 +33,8 @@ from scipy.spatial.transform import Rotation
 
 
 class Window(QWidget):
-    TZ = register()
+    TZ = Register()
+
     def __init__(self):
         super().__init__()
         self.Window = None
@@ -157,7 +161,7 @@ class WorkWindow(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground)  # 背景透明
         self.ui.setupUi(self)
 
-        self.ui.label2_1.setText('v2.1')  # 版本号
+        self.ui.label2_1.setText('v2.2')  # 版本号
         # 信号槽
         self.ui.buttonGroup.buttonClicked.connect(self.buttonGroup)
         self.ui.pushButton_ok.clicked.connect(self.pushButton_ok)

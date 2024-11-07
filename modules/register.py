@@ -15,7 +15,7 @@ from wmi import WMI
 from modules.my_Sqlite3 import my_Sqlite3
 
 
-class register:
+class Register:
     def __init__(self):
         self.Des_Key = b"JIAOXING"  # Key 应确保为字节串
         self.Des_IV = b"\x15\x01*\x03\x15#\x02\x00"  # IV也应为字节串

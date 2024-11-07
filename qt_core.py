@@ -13,11 +13,19 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-from .img_rc import *
 
-from pyDes import des, CBC, PAD_PKCS5
-import sqlite3
-from datetime import datetime
+# QT CORE
+# Change for PySide Or PyQt
+# ///////////////////////// WARNING: ////////////////////////////
+# Remember that changing to PyQt too many modules will have 
+# problems because some classes have different names like: 
+# Property (pyqtProperty), Slot (pyqtSlot), Signal (pyqtSignal)
+# among others.
+# ///////////////////////////////////////////////////////////////
+from PySide6.QtCore import *
+from PySide6.QtGui import *
+from PySide6.QtWidgets import *
+from PySide6.QtSvgWidgets import *
 
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
                             QSize, Qt)
@@ -25,14 +33,3 @@ from PySide6.QtGui import (QCursor,
                            QFont, QIcon)
 from PySide6.QtWidgets import (QFrame, QWidget, QLabel, QLineEdit,
                                QPushButton)
-
-# GUI FILE
-from .ui_main import Ui_MainWindow
-from .ui_main_1 import Ui_MainWindow_1
-from .ui_main_2 import Ui_MainWindow_2
-from .ui_qmessagebox import Ui_QMessageBoxWindow
-from .ui_work import Ui_WorkWindow
-from .ui_help import Ui_Help
-from .ui_report import Ui_Report
-from .register import Register
-from .my_Sqlite3 import my_Sqlite3

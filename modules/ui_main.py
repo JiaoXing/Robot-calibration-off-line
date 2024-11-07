@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.1
+## Created by: Qt User Interface Compiler version 6.8.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -14,19 +14,19 @@ from PySide6.QtGui import (QCursor,
                            QFont, QIcon)
 from PySide6.QtWidgets import (QFrame, QLabel, QLineEdit,
                                QPushButton)
-from . img_rc import *
+
 
 class Ui_MainWindow(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(240, 300)
-        Form.setMinimumSize(QSize(240, 300))
-        Form.setMaximumSize(QSize(300, 300))
+    def setupUi(self, MainWindow):
+        if not MainWindow.objectName():
+            MainWindow.setObjectName(u"MainWindow")
+        MainWindow.resize(240, 300)
+        MainWindow.setMinimumSize(QSize(240, 300))
+        MainWindow.setMaximumSize(QSize(300, 300))
         icon = QIcon()
-        icon.addFile(u":/Image/\u56fe\u6807.png", QSize(), QIcon.Normal, QIcon.Off)
-        Form.setWindowIcon(icon)
-        Form.setStyleSheet(u"QFrame#frame {\n"
+        icon.addFile(u":/Image/\u56fe\u6807.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        MainWindow.setWindowIcon(icon)
+        MainWindow.setStyleSheet(u"QFrame#frame {\n"
 "border-image: url(:/Image/\u80cc\u666f.png);\n"
 "border-radius: 8px;\n"
 "}\n"
@@ -101,18 +101,18 @@ class Ui_MainWindow(object):
 "QPushButton#pushButton_tz:pressed,QPushButton#pushButton_zc:pressed{\n"
 "color:rgb(31, 200, 28);\n"
 "}")
-        self.frame = QFrame(Form)
+        self.frame = QFrame(MainWindow)
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(0, 0, 240, 300))
         self.frame.setStyleSheet(u"")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.pushButton_ok = QPushButton(self.frame)
         self.pushButton_ok.setObjectName(u"pushButton_ok")
         self.pushButton_ok.setGeometry(QRect(20, 210, 200, 50))
         self.pushButton_ok.setMinimumSize(QSize(200, 50))
         self.pushButton_ok.setMaximumSize(QSize(200, 50))
-        self.pushButton_ok.setCursor(QCursor(Qt.OpenHandCursor))
+        self.pushButton_ok.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         self.pushButton_ok.setStyleSheet(u"")
         self.pushButton_ok.setIconSize(QSize(20, 20))
         self.lineEdit_password = QLineEdit(self.frame)
@@ -127,16 +127,16 @@ class Ui_MainWindow(object):
         font.setItalic(False)
         self.lineEdit_password.setFont(font)
         self.lineEdit_password.setStyleSheet(u"")
-        self.lineEdit_password.setEchoMode(QLineEdit.Password)
+        self.lineEdit_password.setEchoMode(QLineEdit.EchoMode.Password)
         self.pushButton_tz = QPushButton(self.frame)
         self.pushButton_tz.setObjectName(u"pushButton_tz")
         self.pushButton_tz.setGeometry(QRect(22, 266, 93, 30))
-        self.pushButton_tz.setCursor(QCursor(Qt.OpenHandCursor))
+        self.pushButton_tz.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         self.pushButton_tz.setStyleSheet(u"")
         self.pushButton_zc = QPushButton(self.frame)
         self.pushButton_zc.setObjectName(u"pushButton_zc")
         self.pushButton_zc.setGeometry(QRect(130, 266, 93, 30))
-        self.pushButton_zc.setCursor(QCursor(Qt.OpenHandCursor))
+        self.pushButton_zc.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         self.pushButton_zc.setStyleSheet(u"")
         self.label2 = QLabel(self.frame)
         self.label2.setObjectName(u"label2")
@@ -149,7 +149,7 @@ class Ui_MainWindow(object):
         self.pushButton_exit.setGeometry(QRect(190, 10, 40, 30))
         self.pushButton_exit.setMinimumSize(QSize(40, 30))
         self.pushButton_exit.setMaximumSize(QSize(40, 30))
-        self.pushButton_exit.setCursor(QCursor(Qt.OpenHandCursor))
+        self.pushButton_exit.setCursor(QCursor(Qt.CursorShape.OpenHandCursor))
         self.label1 = QLabel(self.frame)
         self.label1.setObjectName(u"label1")
         self.label1.setGeometry(QRect(0, 5, 40, 35))
@@ -157,23 +157,23 @@ class Ui_MainWindow(object):
         self.label2.setBuddy(self.lineEdit_password)
 #endif // QT_CONFIG(shortcut)
 
-        self.retranslateUi(Form)
-        self.pushButton_exit.clicked.connect(Form.close)
+        self.retranslateUi(MainWindow)
+        self.pushButton_exit.clicked.connect(MainWindow.close)
 
-        QMetaObject.connectSlotsByName(Form)
+        QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Robot calibration off-line", None))
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Robot calibration off-line", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_ok.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_ok.setText(QCoreApplication.translate("Form", u"\u767b\u5f55", None))
-        self.lineEdit_password.setText(QCoreApplication.translate("Form", u"\u8bf7\u8f93\u5165\u5bc6\u7801", None))
-        self.pushButton_tz.setText(QCoreApplication.translate("Form", u"\u673a\u5668\u7279\u5f81\u7801", None))
-        self.pushButton_zc.setText(QCoreApplication.translate("Form", u"\u6ce8\u518c", None))
-        self.label2.setText(QCoreApplication.translate("Form", u"\u6ce8\u518c\u7801\uff1a", None))
-        self.pushButton_exit.setText(QCoreApplication.translate("Form", u"\u00d7", None))
+        self.pushButton_ok.setText(QCoreApplication.translate("MainWindow", u"\u767b\u5f55", None))
+        self.lineEdit_password.setText(QCoreApplication.translate("MainWindow", u"\u8bf7\u8f93\u5165\u5bc6\u7801", None))
+        self.pushButton_tz.setText(QCoreApplication.translate("MainWindow", u"\u673a\u5668\u7279\u5f81\u7801", None))
+        self.pushButton_zc.setText(QCoreApplication.translate("MainWindow", u"\u6ce8\u518c", None))
+        self.label2.setText(QCoreApplication.translate("MainWindow", u"\u6ce8\u518c\u7801\uff1a", None))
+        self.pushButton_exit.setText(QCoreApplication.translate("MainWindow", u"\u00d7", None))
         self.label1.setText("")
     # retranslateUi
 
