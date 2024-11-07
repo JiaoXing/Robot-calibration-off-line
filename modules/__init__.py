@@ -25,5 +25,7 @@ from . ui_qmessagebox import Ui_QMessageBoxWindow
 from . ui_work import Ui_WorkWindow
 from . ui_help import Ui_Help
 from . ui_report import Ui_Report
+from . register import register
+from . my_Sqlite3 import my_Sqlite3
 
 

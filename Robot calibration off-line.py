@@ -4,27 +4,19 @@
 # @File     :Main_启动
 # @Date     :2022/11/28 9:47
 # @Author   :叫猩
-# @Email    :w13555929918@qq.com
+# @Email    :1027918098@qq.com
 # @Software :PyCharm
 """
-import sys, time, re ,os
+import time, re, sys
+# 加密
 # 窗口UI文件调用地址
 from modules import *
-# 加密
-from base64 import b64encode
-from ctypes import windll
-from hashlib import md5
-from pyDes import des, CBC, PAD_PKCS5
-from wmi import WMI
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.utils import ImageReader
 from PIL import Image
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image as excel_Image
-from PySide6 import QtWidgets
-
-windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")
 
 # 离线标定算法
 from re import findall
@@ -33,145 +25,12 @@ from matplotlib import patches as mp
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from numpy import *
-from scipy.optimize import leastsq, newton
+from scipy.optimize import leastsq
 from scipy.spatial.transform import Rotation
-
-
-class register:
-    def __init__(self):
-        self.Des_Key = "JIAOXING"  # Key
-        self.Des_IV = "\x15\1\x2a\3\1\x23\2\0"  # 自定IV向量
-        ############ 1. 获取硬件信息,输出 macode
-        #   1.CPU序列号（ID） 2.本地连接 无线局域网 以太网的MAC 3.硬盘序列号（唯一） 4.主板序列号（唯一）
-        self.s = WMI()
-        self.ontent = self.getCombinNumber(None)
-        self.ontent_sy = self.getCombinNumber(True)
-
-    # mac 地址（包括虚拟机的）
-    def get_network_info(self):
-        network = []
-        for nw in self.s.Win32_NetworkAdapterConfiguration():  # IPEnabled=0
-            if nw.MACAddress != None:
-                network.append(nw.MACAddress)  # 无线局域网适配器 WLAN 物理地址
-        return network
-
-    def get_cpu_id(self):  # CPU序列号，唯一且无法修改
-        ID_list = []
-        for cpu in self.s.Win32_Processor():
-            ID_list.append(cpu.ProcessorId.strip())
-        return ID_list[0]
-
-    def get_disk_id(self):  # 硬盘序列号，唯一且无法修改
-        ID_list = []
-        for physical_disk in self.s.Win32_DiskDrive():
-            ID_list.append(physical_disk.SerialNumber)
-        return ID_list[0]
-
-    def get_board_id(self):  # 主板序列号，唯一且无法修改
-        ID_list = []
-        for board in self.s.Win32_BaseBoard():
-            ID_list.append(board.SerialNumber)
-        return ID_list[0]
-
-    def get_bios_id(self):  # BIOS序列号，唯一且无法修改
-        ID_list = []
-        for bios in self.s.Win32_BIOS():
-            ID_list.append(bios.SerialNumber)
-        return ID_list[0]
-
-    #  由于机器码太长，故选取机器码字符串部分字符
-    def getCombinNumber(self, sy):
-        a = self.get_cpu_id()
-        b = self.get_disk_id()
-        c = self.get_board_id()
-        d = self.get_bios_id()
-        if sy == None:
-            machinecode_str = a[:] + b[:] + c[:] + d[:]
-        else:
-            machinecode_str = "".join(self.get_network_info())
-
-        MD5 = md5()
-        MD5.update(machinecode_str.encode(encoding='utf-8'))
-        return MD5.hexdigest()
-
-    # 2. 注册登录
-    # DES+base64加密
-    def Encrypted(self, tr):
-        k = des(self.Des_Key, CBC, self.Des_IV, pad=None, padmode=PAD_PKCS5)
-        EncryptStr = k.encrypt(tr)
-        return b64encode(EncryptStr)  # 转base64编码返回
-
-    # 获取注册码，验证成功后生成注册文件
-    def regist(self, key):
-
-        if key:
-            if key[0:2] != "sy":
-                tent = bytes(self.ontent, encoding='utf-8')
-                key_decrypted = bytes(key, encoding='utf-8')
-            else:
-                tent = bytes(self.ontent_sy, encoding='utf-8')
-                key_decrypted = bytes(key[2:], encoding='utf-8')
-            content = self.Encrypted(tent)
-            if content != 0 and key_decrypted != 0:
-                if content != key_decrypted:
-                    return False
-                elif content == key_decrypted:
-                    # 读写文件要加判断
-                    with open('register.txt', 'w') as f:
-                        f.write(key)
-                        f.close()
-                    return True
-                else:
-                    return False
-            else:
-                return False
-        else:
-            return False
-
-    # 打开程序先调用注册文件，比较注册文件中注册码与此时获取的硬件信息编码后是否一致
-    def checkAuthored(self):
-
-        tent = bytes(self.ontent, encoding='utf-8')
-        content = self.Encrypted(tent)
-        tent = bytes(self.ontent_sy, encoding='utf-8')
-        content_sy = self.Encrypted(tent)
-        # 读写文件要加判断
-        try:
-            f = open('register.txt', 'r')
-            if f:
-                key = f.read()
-                if key:
-                    if key[0:2] != "sy":
-                        key_decrypted = bytes(key, encoding='utf-8')  # 注册文件中注册码
-                        if key_decrypted:
-                            if key_decrypted == content:
-                                checkAuthoredResult = 1  # 注册文件与机器码一致
-                            else:
-                                checkAuthoredResult = -1  # 注册文件与机器码不一致
-                        else:
-                            checkAuthoredResult = -2  # 注册文件的注册码不能被解析
-                    else:
-                        key_decrypted = bytes(key[2:], encoding='utf-8')  # 注册文件中注册码
-                        if key_decrypted:
-                            if key_decrypted == content_sy:
-                                checkAuthoredResult = 1  # 注册文件与机器码一致
-                            else:
-                                checkAuthoredResult = -1  # 注册文件与机器码不一致
-                        else:
-                            checkAuthoredResult = -2  # 注册文件的注册码不能被解析
-                else:
-                    checkAuthoredResult = -3  # 注册文件中不能被读取
-            else:
-                checkAuthoredResult = -4  # 错误
-        except:
-            checkAuthoredResult = 0
-            # 未找到注册文件，请重新输入注册码登录
-        return checkAuthoredResult
 
 
 class Window(QWidget):
     TZ = register()
-
     def __init__(self):
         super().__init__()
         self.Window = None
@@ -197,8 +56,10 @@ class Window(QWidget):
         self.mainwindow_2 = MainWindow_2()
         self.mainwindow_2.show()
 
-    def WindowQMessageBox(self):
+    def WindowQMessageBox(self, qmessage):
+
         self.windowqmessagebox = WindowQMessageBox()
+        self.windowqmessagebox.ui.label.setText(qmessage)
         self.windowqmessagebox.show()
 
     def WorkWindow(self):
@@ -217,7 +78,7 @@ class MainWindow(QWidget):
     Si_MainWindow_1 = Signal()
     Si_MainWindow_2 = Signal()
     Si_WorkWindow = Signal()
-    Si_WindowQMessageBox = Signal()
+    Si_WindowQMessageBox = Signal(str)
 
     # 窗口UI属性
     def __init__(self):
@@ -239,15 +100,15 @@ class MainWindow(QWidget):
         self.Si_MainWindow_2.emit()
 
     def pushButton_ok(self):
-        self.ok = Window.TZ.checkAuthored()
+        self.ok, self.qmessage = Window.TZ.checkAuthored()
         if self.ok == 1:
             self.Si_WorkWindow.emit()
-        elif self.ok == 0 or -1 or -2 or -3 or -4:
-            key = self.ui.lineEdit_password.text()
-            if Window.TZ.regist(key):
-                self.Si_WorkWindow.emit()
-            else:
-                self.Si_WindowQMessageBox.emit()
+        else:
+            if len(self.ui.lineEdit_password.text()) > 5:
+                Window.TZ.regist(self.ui.lineEdit_password.text())  # 使用函数进行数据写入
+            self.ok, self.qmessage = Window.TZ.checkAuthored()
+            self.Si_WindowQMessageBox.emit(self.qmessage)
+        # 处理异常的代码
 
 
 class MainWindow_1(QWidget):
@@ -258,9 +119,9 @@ class MainWindow_1(QWidget):
         self.setWindowFlags(Qt.FramelessWindowHint)  # 设置窗体标题栏隐藏
         self.setAttribute(Qt.WA_TranslucentBackground)  # 背景透明
         self.ui.setupUi(self)
-        Text = Window.TZ.ontent + Window.TZ.ontent_sy
+        key_hash = Window.TZ.getCombinNumber()
         # # 信号槽
-        self.ui.textEdit.setText(Text)
+        self.ui.textEdit.setText(key_hash)
 
 
 class MainWindow_2(QWidget):
@@ -281,7 +142,7 @@ class WindowQMessageBox(QWidget):
         self.setWindowFlags(Qt.FramelessWindowHint)  # 设置窗体标题栏隐藏
         self.setAttribute(Qt.WA_TranslucentBackground)  # 背景透明
         self.ui.setupUi(self)
-        self.ui.label.setText("注册码错误")
+        self.ui.label.setText("")
 
 
 class WorkWindow(QWidget):
@@ -296,17 +157,17 @@ class WorkWindow(QWidget):
         self.setAttribute(Qt.WA_TranslucentBackground)  # 背景透明
         self.ui.setupUi(self)
 
-        self.ui.label2_1.setText('v2.0')  # 版本号
+        self.ui.label2_1.setText('v2.1')  # 版本号
         # 信号槽
         self.ui.buttonGroup.buttonClicked.connect(self.buttonGroup)
         self.ui.pushButton_ok.clicked.connect(self.pushButton_ok)
         self.ui.pushButton_help.clicked.connect(self.pushButton_help)
         self.ui.pushButton_report.clicked.connect(self.pushButton_report)
         self.ui.pushButton_exit.clicked.connect(self.pushButton_exit)
-        self.ui.textEdit1.dragEnterEvent=self.dragEnterEvent1
-        self.ui.textEdit2.dragEnterEvent=self.dragEnterEvent2
-        self.ui.textEdit1.dropEvent=self.dropEvent1
-        self.ui.textEdit2.dropEvent=self.dropEvent2
+        self.ui.textEdit1.dragEnterEvent = self.dragEnterEvent1
+        self.ui.textEdit2.dragEnterEvent = self.dragEnterEvent2
+        self.ui.textEdit1.dropEvent = self.dropEvent1
+        self.ui.textEdit2.dropEvent = self.dropEvent2
 
         # 报告数据
         self.buttonGroup_name = None
@@ -385,7 +246,7 @@ class WorkWindow(QWidget):
                 self.windowqmessagebox.show()
             TEXT = self.Rigid_tT_3D(self.buttonGroup_name, A, B, tR)
             self.ui.textEdit3.setText(TEXT)
-            self.deta_txt(self.buttonGroup_name,self.ui.textEdit1.toPlainText(),self.ui.textEdit2.toPlainText(),TEXT)
+            self.deta_txt(self.buttonGroup_name, self.ui.textEdit1.toPlainText(), self.ui.textEdit2.toPlainText(), TEXT)
         else:
             pass
 
@@ -399,7 +260,7 @@ class WorkWindow(QWidget):
 
         self.windowReport.buttonGroup_name = self.buttonGroup_name
         if self.path_save != None:
-            self.windowReport.ui.lineEdit2.setText(self.path_save.rsplit('/',1)[0])
+            self.windowReport.ui.lineEdit2.setText(self.path_save.rsplit('/', 1)[0])
         self.windowReport.content = self.content
         self.windowReport.fig = self.fig
 
@@ -503,6 +364,7 @@ class WorkWindow(QWidget):
                 matches = DataB.split(',')
                 DataB = "P" + str(number) + "=[{},{},{}]".format(matches[-3], matches[-2], matches[-1])
                 self.ui.textEdit2.append(DataB)
+
     # format 格式化
     def getDataA(self, text):
         # 获取text全部内容并去除内容中的空格,用split将内容以每一行末尾的\n分割成一个列表
@@ -519,12 +381,13 @@ class WorkWindow(QWidget):
             content[j, 0:3] = text[i].split(",")
             tR[j, 0:X] = text[i + 1].split(",")
             j += 1
-        self.Robot_input=[]
+        self.Robot_input = []
         list1 = content.tolist()
         list2 = tR.tolist()
         for i in range(len(list1)):
             self.Robot_input.append(list1[i] + list2[i])
         return content.tolist(), tR.tolist()
+
     # format 格式化
     def getDataB(self, text):
         # 获取text全部内容并去除内容中的空格,用split将内容以每一行末尾的\n分割成一个列表
@@ -598,12 +461,12 @@ class WorkWindow(QWidget):
 
         MO_tr = tr - roll(tr, 1, axis=0)
         MO_Pb = Pb - roll(Pb, 1, axis=0)
-        mu_tr = tr - mean(tr, axis=0)# 计算tr的均值
-        mu_Pb = Pb - mean(Pb, axis=0)# 计算Pb的均值
+        mu_tr = tr - mean(tr, axis=0)  # 计算tr的均值
+        mu_Pb = Pb - mean(Pb, axis=0)  # 计算Pb的均值
 
         # 获取MX, MY, MZ的值
         MX, MY, MZ = map(float, [self.ui.lineEdit1.text(), self.ui.lineEdit2.text(), self.ui.lineEdit3.text()])
-        if MX!=0 or MY!=0 or MZ!=1000:
+        if MX != 0 or MY != 0 or MZ != 1000:
             tT = [MX, MY, MZ]
         else:
             def TOOL(tool_xyz):
@@ -615,8 +478,8 @@ class WorkWindow(QWidget):
                     system.append(sum(array(mu_tr[i] * tool) ** 2) - sum(array(mu_Pb[i].T) ** 2))
 
                 return array(system)
-            tT = leastsq(TOOL, [MX, MY, MZ])[0]  # 通过最小二乘法计算未知工具 X Y Z;
 
+            tT = leastsq(TOOL, [MX, MY, MZ])[0]  # 通过最小二乘法计算未知工具 X Y Z;
 
         tT = mat(append(tT, 1)).T  # 将计算出的 X Y Z 转换为齐次坐标;
 
@@ -625,7 +488,7 @@ class WorkWindow(QWidget):
         for i in range(N):
             Paa[i] = (mat(tr[i]) * tT).T
 
-        W_R, W_t ,F_R ,F_t = self.rigid_transform_3D(Paa, Pb)
+        W_R, W_t, F_R, F_t = self.rigid_transform_3D(Paa, Pb)
 
         Pbb = (W_R.I * (Paa.T - tile(W_t, (1, N)))).T
         Error = Pbb - Pb
@@ -642,7 +505,7 @@ class WorkWindow(QWidget):
 
         self.Calculated_TCP = around(tT[:3], 4).T.tolist()
         self.Calculated_RTCP = around(QTCP[:3], 4).T.tolist()
-        self.Calculated_Error = around(Error[:,:3], 4)
+        self.Calculated_Error = around(Error[:, :3], 4)
         self.Orientation_Matrix = W_R[:3, :3].tolist()
         self.Calculated_Base = around(W_t[:3], 4).T.tolist()
         self.Calculated_Frame = around(F_t[:3], 4).T.tolist()
@@ -658,8 +521,8 @@ class WorkWindow(QWidget):
             ZYX = Rotation.from_matrix(W_R[:3, :3]).as_euler('ZYX', degrees=True)
             self.Orientation_Base = around(ZYX, 5).tolist()
             TEXT += "\nBase:{}".format(around(W_t[:3], 4).T.tolist()) + " ABC:[[{},{},{}]]".format(round(ZYX[0], 5),
-                                                                                                       round(ZYX[1], 5),
-                                                                                                       round(ZYX[2], 5))
+                                                                                                   round(ZYX[1], 5),
+                                                                                                   round(ZYX[2], 5))
         elif Robot == "FANUC" or "YASKAWA":
             # FANUC 旋转矩阵到欧拉角
             xyz = Rotation.from_matrix(W_R[:3, :3]).as_euler('xyz', degrees=True)
@@ -670,8 +533,8 @@ class WorkWindow(QWidget):
         F_R = Rotation.from_matrix(F_R[:3, :3]).as_euler('XYZ', degrees=True)
         self.Orientation_Frame = around(F_R, 5).tolist()
         TEXT += "\nFrame:{}".format(around(F_t[:3], 4).T.tolist()) + " XYZ:[[{},{},{}]]".format(round(F_R[0], 5),
-                                                                                                   round(F_R[1], 5),
-                                                                                                   round(F_R[2], 5))
+                                                                                                round(F_R[1], 5),
+                                                                                                round(F_R[2], 5))
 
         TEXT += "\nRmse:{}mm".format(around(self.Calculated_Rmse, 10))
 
@@ -682,13 +545,14 @@ class WorkWindow(QWidget):
 
         return TEXT
 
-    def deta_txt(self,Robot,A,B,text):
+    def deta_txt(self, Robot, A, B, text):
         self.content = "************************ Robot calibration off-line: " + Robot + " ************************" + "\n"
-        self.content +=  "Calculation started: "+time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time()))+"\n\n"
-        self.content += 'Robot input:'+'\n\n' + A +'\n\n'
-        self.content += 'Calibration input:'+'\n\n' + B +'\n\n'
-        self.content += "Remaining Cell Alignment error (X-err,Y-err,Z-err):" +'\n\n' + format(self.Calculated_Error) +'\n\n'
-        self.content += text +'\n'
+        self.content += "Calculation started: " + time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time())) + "\n\n"
+        self.content += 'Robot input:' + '\n\n' + A + '\n\n'
+        self.content += 'Calibration input:' + '\n\n' + B + '\n\n'
+        self.content += "Remaining Cell Alignment error (X-err,Y-err,Z-err):" + '\n\n' + format(
+            self.Calculated_Error) + '\n\n'
+        self.content += text + '\n'
 
         with open('Data.txt', 'a') as f:
             f.write(self.content)
@@ -715,25 +579,26 @@ class Window_3D(QDialog):
 
     def plot(self, Pa, Pb, Pbb):
         self.figure.clear()
-        #折线图
-        err= Pbb - Pb
-        err_len= len(err)
-        X = [i for i in range(1,err_len+1)]
+        # 折线图
+        err = Pbb - Pb
+        err_len = len(err)
+        X = [i for i in range(1, err_len + 1)]
         ax = self.figure.add_subplot(121)
-        ax.plot(X,err[:, 0], marker='.')
-        ax.plot(X,err[:, 1], marker='.')
-        ax.plot(X,err[:, 2], marker='.')
+        ax.plot(X, err[:, 0], marker='.')
+        ax.plot(X, err[:, 1], marker='.')
+        ax.plot(X, err[:, 2], marker='.')
 
         abs_sum_list = [sum([abs(x) for x in row]) for row in err]  # 计算每行误差的绝对值之和
-        if max(abs_sum_list)>1 :  # 如果最大值大于1
+        if max(abs_sum_list) > 1:  # 如果最大值大于1
             max_index = abs_sum_list.index(max(abs_sum_list))  # 获取最大值的索引
-            y_min = min(amin(err,axis=1))[0]  # 获取err中的最小值
-            y_max = max(amax(err,axis=1))[0]  # 获取err中的最大值
-            red_patch = mp.Rectangle((max_index + 0.8, y_min-0.1), 0.4, y_max - y_min, fill=False, edgecolor='red', linewidth=2)        # 将红色矩形补丁添加到图中
-            ax.add_patch(red_patch)  #添加红色矩形补丁
-            plt.text(max_index+0.4,y_max,max_index+1,c='r')
+            y_min = min(amin(err, axis=1))[0]  # 获取err中的最小值
+            y_max = max(amax(err, axis=1))[0]  # 获取err中的最大值
+            red_patch = mp.Rectangle((max_index + 0.8, y_min - 0.1), 0.4, y_max - y_min, fill=False, edgecolor='red',
+                                     linewidth=2)  # 将红色矩形补丁添加到图中
+            ax.add_patch(red_patch)  # 添加红色矩形补丁
+            plt.text(max_index + 0.4, y_max, max_index + 1, c='r')
 
-        #3D图
+        # 3D图
         ax = self.figure.add_subplot(122, projection='3d')
         ax.scatter(Pa[:, 0], Pa[:, 1], Pa[:, 2], s=100, marker='.')
         ax.scatter(Pb[:, 0], Pb[:, 1], Pb[:, 2], s=100, marker='o')
@@ -786,12 +651,12 @@ class WorkReport(QWidget):
         self.ui.setupUi(self)
         self.ui.pushButton_save.clicked.connect(self.Report_all)
 
-        self.today=None
+        self.today = None
         self.Robot_Name = None
         self.buttonGroup_name = None
         self.path_save = None
         self.content = None
-        self.fig = None         #PDF 折线图
+        self.fig = None  # PDF 折线图
 
         self.Robot_input = None
         self.Calibration_input = None
@@ -805,7 +670,6 @@ class WorkReport(QWidget):
         self.Orientation_Base = None
         self.Calculated_Frame = None
         self.Orientation_Frame = None
-
 
     # 重写鼠标事件
     def mousePressEvent(self, event: QMouseEvent) -> None:
@@ -827,9 +691,9 @@ class WorkReport(QWidget):
         # 定义生成日期
         self.today = time.strftime('%Y-%m-%d %H:%M', time.localtime(time.time()))
         self.Robot_Name = self.ui.lineEdit1.text()
-        self.path_save = self.ui.lineEdit2.text()+ '/Robot calibration report/Robot calibration off-line ' + self.ui.lineEdit1.text()
+        self.path_save = self.ui.lineEdit2.text() + '/Robot calibration report/Robot calibration off-line ' + self.ui.lineEdit1.text()
         path_save = os.path.exists(self.ui.lineEdit2.text() + '/Robot calibration report')
-        if path_save==False:
+        if path_save == False:
             os.mkdir(self.ui.lineEdit2.text() + '/Robot calibration report')
 
         self.Report_txt()
@@ -852,25 +716,24 @@ class WorkReport(QWidget):
         ws1 = wb.active  # 默认表格
         ws1.title = self.buttonGroup_name  # 修改表格名称
 
-
         # 添加logo
         logo = excel_Image('./plugins/logo.png')
-        ws1.add_image(logo,'A1')
+        ws1.add_image(logo, 'A1')
 
         # 写入数据
         data_ABB = [
-            ['','','','','','Name:',self.Robot_Name,''],
-            ['','','','','','Data:',self.today,''],
-            ['', '', '', '', '', '', '',''],
+            ['', '', '', '', '', 'Name:', self.Robot_Name, ''],
+            ['', '', '', '', '', 'Data:', self.today, ''],
+            ['', '', '', '', '', '', '', ''],
             ['', 'X', 'Y', 'Z', 'q1', 'q2', 'q3', 'q4'],
-            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '',''],
-            ['理论:TCP', '', '', '', '', '', '',''],
-            ['', '', '', '', '', '', '',''],
+            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '', ''],
+            ['理论:TCP', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
             ['', 'X', 'Y', 'Z', 'q1', 'q2', 'q3', 'q4'],
             ['测量:RTCP', '=Data!A5', '=Data!B5', '=Data!C5', '', '', '', ''],
             ['理论:RTCP', '', '', '', '', '', '', ''],
             ['', '', '', '', '', '', '', ''],
-            ['', 'X', 'Y', 'Z','q1', 'q2', 'q3', 'q4'],
+            ['', 'X', 'Y', 'Z', 'q1', 'q2', 'q3', 'q4'],
             ['测量:Base', '=Data!A8', '=Data!B8', '=Data!C8', '=Data!A9', '=Data!B9', '=Data!C9', '=Data!D9'],
             ['理论:Base', '', '', '', '', '', '', ''],
             ['', '', '', '', '', '', '', ''],
@@ -879,13 +742,13 @@ class WorkReport(QWidget):
             ['理论:Frame', '', '', '', '', '', '', ''],
         ]
         data_KUKA = [
-            ['','','','','','Name:',self.Robot_Name,''],
-            ['','','','','','Data:',self.today,''],
-            ['', '', '', '', '', '', '',''],
-            ['', 'X', 'Y', 'Z', 'A', 'B', 'C',''],
-            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '',''],
-            ['理论:TCP', '', '', '', '', '', '',''],
-            ['', '', '', '', '', '', '',''],
+            ['', '', '', '', '', 'Name:', self.Robot_Name, ''],
+            ['', '', '', '', '', 'Data:', self.today, ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', 'X', 'Y', 'Z', 'A', 'B', 'C', ''],
+            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '', ''],
+            ['理论:TCP', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
             ['', 'X', 'Y', 'Z', 'A', 'B', 'C', ''],
             ['测量:RTCP', '=Data!A5', '=Data!B5', '=Data!C5', '', '', '', ''],
             ['理论:RTCP', '', '', '', '', '', '', ''],
@@ -899,13 +762,13 @@ class WorkReport(QWidget):
             ['理论:Frame', '', '', '', '', '', '', ''],
         ]
         data_FANUC = [
-            ['','','','','','Name:',self.Robot_Name,''],
-            ['','','','','','Data:',self.today,''],
-            ['', '', '', '', '', '', '',''],
+            ['', '', '', '', '', 'Name:', self.Robot_Name, ''],
+            ['', '', '', '', '', 'Data:', self.today, ''],
+            ['', '', '', '', '', '', '', ''],
             ['', 'X', 'Y', 'Z', 'rX', 'rY', 'rZ', ''],
-            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '',''],
-            ['理论:TCP', '', '', '', '', '', '',''],
-            ['', '', '', '', '', '', '',''],
+            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '', ''],
+            ['理论:TCP', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
             ['', 'X', 'Y', 'Z', 'rX', 'rY', 'rZ', ''],
             ['测量:RTCP', '=Data!A5', '=Data!B5', '=Data!C5', '', '', '', ''],
             ['理论:RTCP', '', '', '', '', '', '', ''],
@@ -919,13 +782,13 @@ class WorkReport(QWidget):
             ['理论:Frame', '', '', '', '', '', '', ''],
         ]
         data_YASKAWA = [
-            ['','','','','','Name:',self.Robot_Name,''],
-            ['','','','','','Data:',self.today,''],
-            ['', '', '', '', '', '', '',''],
-            ['', 'X', 'Y', 'Z', 'A', 'B', 'C',''],
-            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '',''],
-            ['理论:TCP', '', '', '', '', '', '',''],
-            ['', '', '', '', '', '', '',''],
+            ['', '', '', '', '', 'Name:', self.Robot_Name, ''],
+            ['', '', '', '', '', 'Data:', self.today, ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', 'X', 'Y', 'Z', 'A', 'B', 'C', ''],
+            ['测量:TCP', '=Data!A2', '=Data!B2', '=Data!C2', '', '', '', ''],
+            ['理论:TCP', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
             ['', 'X', 'Y', 'Z', 'A', 'B', 'C', ''],
             ['测量:RTCP', '=Data!A5', '=Data!B5', '=Data!C5', '', '', '', ''],
             ['理论:RTCP', '', '', '', '', '', '', ''],
@@ -1011,7 +874,6 @@ class WorkReport(QWidget):
         # 创建 PDF 文件
         pdf_canvas = canvas.Canvas(self.path_save + '.pdf')
 
-
         # 添加logo
         logo = ImageReader('./plugins/logo.png')
         pdf_canvas.drawImage(logo, 30, 800, width=200, height=20)
@@ -1025,26 +887,25 @@ class WorkReport(QWidget):
         pdf_canvas.drawString(0.8 * inch, 9 * inch, 'Project information:')
 
         pdf_canvas.setFontSize(12)
-        pdf_canvas.drawString(1.5 * inch, 8.6 * inch, 'Robot: ' + self.buttonGroup_name )
-        pdf_canvas.drawString(1.5 * inch, 8.4 * inch,'Name: ' + self.Robot_Name )
-        pdf_canvas.drawString(1.5 * inch, 8.2 * inch, 'Rmse: ' + self.Calculated_Rmse  + ' mm ')
-
+        pdf_canvas.drawString(1.5 * inch, 8.6 * inch, 'Robot: ' + self.buttonGroup_name)
+        pdf_canvas.drawString(1.5 * inch, 8.4 * inch, 'Name: ' + self.Robot_Name)
+        pdf_canvas.drawString(1.5 * inch, 8.2 * inch, 'Rmse: ' + self.Calculated_Rmse + ' mm ')
 
         pdf_canvas.setFontSize(12)
         pdf_canvas.drawString(0.8 * inch, 7.5 * inch, 'Deviation per Position:')
         img = Image.open(self.path_save + '.png')
         img_width, img_height = img.size
-        pdf_canvas.drawImage(self.path_save + '.png', x=0.8 * inch, y=4 * inch, width=img_width*0.5, height=0.5*img_height)
+        pdf_canvas.drawImage(self.path_save + '.png', x=0.8 * inch, y=4 * inch, width=img_width * 0.5,
+                             height=0.5 * img_height)
 
         pdf_canvas.setFontSize(10)
-        pdf_canvas.drawString(1.5 * inch, 3.6 * inch, 'TCP: '+format(self.Calculated_TCP))
-        pdf_canvas.drawString(1.5 * inch, 3.4 * inch, 'RTCP: '+format(self.Calculated_RTCP))
-        pdf_canvas.drawString(1.5 * inch, 3.2 * inch, 'Base: '+format(self.Calculated_Base + [self.Orientation_Base]))
-        pdf_canvas.drawString(1.5 * inch, 3.0 * inch, 'From: '+format(self.Calculated_Frame + [self.Orientation_Frame]))
+        pdf_canvas.drawString(1.5 * inch, 3.6 * inch, 'TCP: ' + format(self.Calculated_TCP))
+        pdf_canvas.drawString(1.5 * inch, 3.4 * inch, 'RTCP: ' + format(self.Calculated_RTCP))
+        pdf_canvas.drawString(1.5 * inch, 3.2 * inch, 'Base: ' + format(self.Calculated_Base + [self.Orientation_Base]))
+        pdf_canvas.drawString(1.5 * inch, 3.0 * inch,
+                              'From: ' + format(self.Calculated_Frame + [self.Orientation_Frame]))
 
-
-
-        #底部信息
+        # 底部信息
         # 加载作者logo图像
         Author_logo = ImageReader('./plugins/图标.png')
         # 在PDF文档中添加作者logo

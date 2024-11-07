@@ -25,7 +25,7 @@ class Ui_WorkWindow(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(590, 530)
-        Form.setMinimumSize(QSize(590, 0))
+        Form.setMinimumSize(QSize(590, 530))
         Form.setMaximumSize(QSize(600, 16777215))
         font = QFont()
         font.setFamilies([u"Microsoft Sans Serif"])
@@ -276,18 +276,18 @@ class Ui_WorkWindow(object):
 " background-color: rgb(182, 34, 5)\n"
 "}\n"
 "\n"
-"QPushButton#pushButton_dr_robot,QPushButton#pushButton_dr_3d,QPushButton#pushButton_zbzh,QPushButton#pushButton_by,QPushButton#pushButton_report{\n"
-" color: rgb(25"
-                        "5, 255, 255);\n"
+"QPushButton#pushButton_dr_robot,QPushButton#pushButton_dr_3d,QPushButton#pushButton_zbzh,QPushButton#pushButton_toolbox,QPushButton#pushButton_report{\n"
+" color: r"
+                        "gb(255, 255, 255);\n"
 " background-color: rgb(128, 128, 128);\n"
 " font: 12pt \"\u9ed1\u4f53\";\n"
 " border-radius: 3px;\n"
 "}\n"
 "\n"
-"QPushButton#pushButton_dr_robot:hover,QPushButton#pushButton_dr_3d:hover,QPushButton#pushButton_zbzh:hover,QPushButton#pushButton_by:hover,QPushButton#pushButton_report:hover{\n"
+"QPushButton#pushButton_dr_robot:hover,QPushButton#pushButton_dr_3d:hover,QPushButton#pushButton_zbzh:hover,QPushButton#pushButton_toolbox:hover,QPushButton#pushButton_report:hover{\n"
 " background-color: rgb(160, 160, 160);\n"
 "}\n"
-"QPushButton#pushButton_dr_robot:pressed,QPushButton#pushButton_dr_3d:pressed,QPushButton#pushButton_zbzh:pressed,QPushButton#pushButton_by:pressed,QPushButton#pushButton_report:pressed{\n"
+"QPushButton#pushButton_dr_robot:pressed,QPushButton#pushButton_dr_3d:pressed,QPushButton#pushButton_zbzh:pressed,QPushButton#pushButton_toolbox:pressed,QPushButton#pushButton_report:pressed{\n"
 " background-color: rgb(96, 96, 96);\n"
 "}\n"
 "\n"
@@ -309,7 +309,8 @@ class Ui_WorkWindow(object):
 "\n"
 "QRadioButton{\n"
 " color: rgb(255, 255, 255);\n"
-"}\n"
+""
+                        "}\n"
 "\n"
 "\n"
 "")
@@ -458,14 +459,14 @@ class Ui_WorkWindow(object):
         self.pushButton_report.setCursor(QCursor(Qt.OpenHandCursor))
         self.pushButton_report.setStyleSheet(u"")
         self.pushButton_report.setIconSize(QSize(20, 20))
-        self.pushButton_by = QPushButton(self.groupBox_2)
-        self.pushButton_by.setObjectName(u"pushButton_by")
-        self.pushButton_by.setGeometry(QRect(130, 10, 80, 43))
-        self.pushButton_by.setMinimumSize(QSize(50, 20))
-        self.pushButton_by.setMaximumSize(QSize(240, 90))
-        self.pushButton_by.setCursor(QCursor(Qt.OpenHandCursor))
-        self.pushButton_by.setStyleSheet(u"")
-        self.pushButton_by.setIconSize(QSize(20, 20))
+        self.pushButton_toolbox = QPushButton(self.groupBox_2)
+        self.pushButton_toolbox.setObjectName(u"pushButton_toolbox")
+        self.pushButton_toolbox.setGeometry(QRect(130, 10, 80, 43))
+        self.pushButton_toolbox.setMinimumSize(QSize(50, 20))
+        self.pushButton_toolbox.setMaximumSize(QSize(240, 90))
+        self.pushButton_toolbox.setCursor(QCursor(Qt.OpenHandCursor))
+        self.pushButton_toolbox.setStyleSheet(u"")
+        self.pushButton_toolbox.setIconSize(QSize(20, 20))
         self.pushButton_zbzh = QPushButton(self.groupBox_2)
         self.pushButton_zbzh.setObjectName(u"pushButton_zbzh")
         self.pushButton_zbzh.setGeometry(QRect(10, 10, 80, 43))
@@ -549,9 +550,9 @@ class Ui_WorkWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.pushButton_report.setText(QCoreApplication.translate("Form", u"\u751f\u6210\u62a5\u544a", None))
 #if QT_CONFIG(tooltip)
-        self.pushButton_by.setToolTip("")
+        self.pushButton_toolbox.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_by.setText(QCoreApplication.translate("Form", u"\u5907\u7528", None))
+        self.pushButton_toolbox.setText(QCoreApplication.translate("Form", u"\u5de5\u5177\u7bb1", None))
 #if QT_CONFIG(tooltip)
         self.pushButton_zbzh.setToolTip("")
 #endif // QT_CONFIG(tooltip)

@@ -13,7 +13,7 @@
   <property name="minimumSize">
    <size>
     <width>590</width>
-    <height>0</height>
+    <height>530</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -274,17 +274,17 @@ QPushButton#pushButton_exit:pressed{
  background-color: rgb(182, 34, 5)
 }
 
-QPushButton#pushButton_dr_robot,QPushButton#pushButton_dr_3d,QPushButton#pushButton_zbzh,QPushButton#pushButton_by,QPushButton#pushButton_report{
+QPushButton#pushButton_dr_robot,QPushButton#pushButton_dr_3d,QPushButton#pushButton_zbzh,QPushButton#pushButton_toolbox,QPushButton#pushButton_report{
  color: rgb(255, 255, 255);
  background-color: rgb(128, 128, 128);
  font: 12pt &quot;黑体&quot;;
  border-radius: 3px;
 }
 
-QPushButton#pushButton_dr_robot:hover,QPushButton#pushButton_dr_3d:hover,QPushButton#pushButton_zbzh:hover,QPushButton#pushButton_by:hover,QPushButton#pushButton_report:hover{
+QPushButton#pushButton_dr_robot:hover,QPushButton#pushButton_dr_3d:hover,QPushButton#pushButton_zbzh:hover,QPushButton#pushButton_toolbox:hover,QPushButton#pushButton_report:hover{
  background-color: rgb(160, 160, 160);
 }
-QPushButton#pushButton_dr_robot:pressed,QPushButton#pushButton_dr_3d:pressed,QPushButton#pushButton_zbzh:pressed,QPushButton#pushButton_by:pressed,QPushButton#pushButton_report:pressed{
+QPushButton#pushButton_dr_robot:pressed,QPushButton#pushButton_dr_3d:pressed,QPushButton#pushButton_zbzh:pressed,QPushButton#pushButton_toolbox:pressed,QPushButton#pushButton_report:pressed{
  background-color: rgb(96, 96, 96);
 }
 
@@ -911,7 +911,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_by">
+    <widget class="QPushButton" name="pushButton_toolbox">
      <property name="geometry">
       <rect>
        <x>130</x>
@@ -942,7 +942,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>备用</string>
+      <string>工具箱</string>
      </property>
      <property name="iconSize">
       <size>
